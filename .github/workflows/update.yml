@@ -22,10 +22,10 @@ jobs:
         run: "docker run -d -p 80:80 -p 443:443 caddy:2"
 
       - name: Validate Caddyfile
-        run: "docker exec -it caddy - caddy validate ${`cat Caddyfile`}"
+        run: "docker exec -it caddy - echo '$(cat Caddyfile)' | caddy validate -"
 
       - name: Update configuration of running caddy
-        run:  "docker exec -it caddy - echo '${`cat Caddyfile`}' >> '/etc/caddy/Caddyfile'"
+        run:  "docker exec -it caddy - echo '$(cat Caddyfile)' >> '/etc/caddy/Caddyfile'"
 
       - name: Reload configuration of running caddy
         run: "docker exec -it caddy - caddy reload"
