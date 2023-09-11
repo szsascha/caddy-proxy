@@ -18,11 +18,11 @@ jobs:
         # Hack to prevent "Host key verification failed". Should be replaced with a ssh-keyscan based solution
         run: echo "StrictHostKeyChecking no" >> ~/.ssh/config
 
-      - name: Check docker connection
+      - name: Check docker remote connection
         run: "docker version"
 
       - name: Pull caddy and start server
-        run: "docker run -d -p 80:80 -p 443:443 caddy:2"
+        run: "docker run -d -p 80:80 -p 443:443 --name caddy caddy:2"
         # Continue if caddy is running
         continue-on-error: true
 
