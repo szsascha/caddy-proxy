@@ -36,6 +36,6 @@ jobs:
         run:  "docker exec -i caddy /bin/sh -c 'cat > /etc/caddy/Caddyfile' < Caddyfile"
 
       - name: Reload configuration of running caddy
-        run: "docker exec caddy caddy reload"
+        run: "docker exec caddy caddy reload --config /etc/caddy/Caddyfile"
         # Also fails if no config file is loaded
         continue-on-error: true
