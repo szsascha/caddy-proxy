@@ -1,0 +1,30 @@
+name: Deploy
+
+on:
+  - push
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_HOST: "ssh://${{secrets.USER}}@${{secrets.HOST}}:${{secrets.PORT}}"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{secrets.PRIVATE_KEY}}
+
+      - name: Configure host key verification
+        run: "ssh-keyscan -H ${{secrets.HOST}} > ~/.ssh/known_hosts"
+
+      - name: Pull caddy and start server
+        run: "docker run -d -p 80:80 -p 443:443 caddy:2"
+
+      - name: Validate Caddyfile
+        run: "docker exec -it caddy - caddy validate ${`cat Caddyfile`}"
+
+      - name: Update configuration of running caddy
+        run:  "docker exec -it caddy - echo '${`cat Caddyfile`}' >> '/etc/caddy/Caddyfile'"
+
+      - name: Reload configuration of running caddy
+        run: "docker exec -it caddy - caddy reload"
