@@ -26,7 +26,7 @@ jobs:
         # Continue if caddy is running
         continue-on-error: true
 
-      - name: Create empty Caddyfile to validate
+      - name: Save Caddyfile for validation
         run: "docker exec -i caddy /bin/sh -c 'cat > /etc/caddy/Caddyfile_validate' < Caddyfile"
 
       - name: Validate Caddyfile
