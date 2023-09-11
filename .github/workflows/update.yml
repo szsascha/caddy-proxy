@@ -26,11 +26,16 @@ jobs:
         # Continue if caddy is running
         continue-on-error: true
 
+      - name: Create empty Caddyfile to validate
+        run: "docker exec -i caddy /bin/sh -c 'cat > /etc/caddy/Caddyfile_validate' < Caddyfile"
+
       - name: Validate Caddyfile
-        run: "docker exec -it caddy /bin/sh -c \"caddy validate -\" < Caddyfile"
+        run: "docker exec caddy caddy validate --config /etc/caddy/Caddyfile_validate"
 
       - name: Update configuration of running caddy
-        run:  "docker exec -it caddy /bin/sh -c \"cat >> /etc/caddy/Caddyfile\" < Caddyfile"
+        run:  "docker exec -i caddy /bin/sh -c 'cat > /etc/caddy/Caddyfile' < Caddyfile"
 
       - name: Reload configuration of running caddy
-        run: "docker exec -it caddy - caddy reload"
+        run: "docker exec caddy caddy reload"
+        # Also fails if no config file is loaded
+        continue-on-error: true
