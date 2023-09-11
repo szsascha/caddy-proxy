@@ -1,4 +1,4 @@
-server1.szsascha.cloud {
+* {
 	header Content-Type text/html
 	respond <<HTML
 		<strong>Hello, world!</strong><br /><p>See <a href="https://github.com/szsascha/caddy-proxy">https://github.com/szsascha/caddy-proxy</a> for more information about your reverse proxy.</p>
