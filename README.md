@@ -27,8 +27,8 @@ Create and configurate the following secrets in your github repository.
 2. HOST - Hostname or IP of the server
 3. PORT - SSH Port on the server (needs to be open to public in your firewall)
 4. PRIVATE_KEY - Private key of the user who should manage the Caddy container on the server
-5. PUBLIC_KEY - Public key of the corresponding private key
 
 ## Workflow
 
 TODO
+No host key verification

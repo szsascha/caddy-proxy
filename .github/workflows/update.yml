@@ -15,12 +15,9 @@ jobs:
         with:
           ssh-private-key: ${{secrets.PRIVATE_KEY}}
 
-      - name: Configure host key verification
-        run: |
-          mkdir -p ~/.ssh/
-          touch ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
-          "${{secrets.PUBLIC_KEY}}" > ~/.ssh/known_hosts
+      - name: Disable Host key verification
+        # Hack to prevent "Host key verification failed". Should be replaced with a ssh-keyscan based solution
+        run: echo "StrictHostKeyChecking no" >> ~/.ssh/config
 
       - name: Pull caddy and start server
         run: "docker run -d -p 80:80 -p 443:443 caddy:2"
