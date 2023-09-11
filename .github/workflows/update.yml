@@ -20,7 +20,7 @@ jobs:
           mkdir -p ~/.ssh/
           touch ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
-          ${{secrets.PUBLIC_KEY}} > ~/.ssh/known_hosts
+          "${{secrets.PUBLIC_KEY}}" > ~/.ssh/known_hosts
 
       - name: Pull caddy and start server
         run: "docker run -d -p 80:80 -p 443:443 caddy:2"
