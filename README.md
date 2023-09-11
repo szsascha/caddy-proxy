@@ -32,3 +32,5 @@ Create and configurate the following secrets in your github repository.
 
 TODO
 No host key verification
+Cloudflare Full strict
+Cert for IP not possible
