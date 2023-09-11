@@ -27,10 +27,10 @@ jobs:
         continue-on-error: true
 
       - name: Validate Caddyfile
-        run: "docker exec -it caddy - echo '$(cat Caddyfile)' | caddy validate -"
+        run: "docker exec -it caddy /bin/sh -c \"caddy validate -\" < Caddyfile"
 
       - name: Update configuration of running caddy
-        run:  "docker exec -it caddy - echo '$(cat Caddyfile)' >> '/etc/caddy/Caddyfile'"
+        run:  "docker exec -it caddy /bin/sh -c \"cat >> /etc/caddy/Caddyfile\" < Caddyfile"
 
       - name: Reload configuration of running caddy
         run: "docker exec -it caddy - caddy reload"
