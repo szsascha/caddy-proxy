@@ -1,3 +1,5 @@
-server1.szsascha.cloud {
-	respond "<strong>Hello, world!</strong><br /><p>See <a href=\"https://github.com/szsascha/caddy-proxy\">https://github.com/szsascha/caddy-proxy</a> for more information about your reverse proxy.</p>"
+server1.szsascha.cloud, 2.59.132.197 {
+	respond <<HTML
+		<strong>Hello, world!</strong><br /><p>See <a href="https://github.com/szsascha/caddy-proxy">https://github.com/szsascha/caddy-proxy</a> for more information about your reverse proxy.</p>
+		HTML 200
 }
