@@ -12,7 +12,7 @@ There are a few requirements to be able to work with this repository. You need s
 - Shell access with a dedicated user for the github actions with permissions to use docker
 - Public key authentication for the user with shell access
 - Private key of the user with shell access
-- User with shell access should be in group "Docker"
+- User with shell access should be in group "docker"
 - Public available SSH port (Doesn't necessarily have to be 22)
 - Ideally port 80 (HTTP) and 443 (HTTPS) open to public - Espc. 80 is necessary for Let's Encrypt to work
 - Please make sure that the "caddy" container will automatically startup after reboot
