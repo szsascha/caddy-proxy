@@ -22,7 +22,8 @@ jobs:
         run: "docker version"
 
       - name: Pull caddy and start server
-        run: "docker run -d -p 80:80 -p 443:443 --name caddy caddy:2"
+        # Use network host to share hosts 127.0.0.1 in container
+        run: "docker run -d -p 80:80 -p 443:443 --network=\"host\" --name caddy caddy:2"
         # Continue if caddy is running
         continue-on-error: true
 
